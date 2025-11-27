@@ -19,3 +19,21 @@ df = pd.read_json(pd.DataFrame(data).to_json())
 print("=== Data Awal ===")
 print(df)
 print("\n")
+
+# 3. Preprocessing (Mengubah Kata jadi Angka)
+# Komputer tidak mengerti kata "Merah" atau "S", jadi kita ubah ke angka.
+# Contoh: Merah jadi 0, Biru jadi 1, dst.
+le = preprocessing.LabelEncoder()
+
+# Kita buat salinan data untuk diubah ke angka
+df_encoded = df.copy()
+
+# Proses pengubahan untuk setiap kolom
+df_encoded['Warna'] = le.fit_transform(df['Warna'])
+df_encoded['Ukuran'] = le.fit_transform(df['Ukuran'])
+df_encoded['Bahan'] = le.fit_transform(df['Bahan'])
+df_encoded['Kategori'] = le.fit_transform(df['Kategori'])
+
+print("=== Data Setelah Diubah ke Angka ===")
+print(df_encoded)
+print("\n")

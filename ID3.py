@@ -47,9 +47,10 @@ df_encoded['Ukuran'] = le_ukuran.fit_transform(df['Ukuran'])
 df_encoded['Bahan'] = le_bahan.fit_transform(df['Bahan'])
 df_encoded['Kategori'] = le_kategori.fit_transform(df['Kategori'])
 
-print("=== Data Siap Hitung (Angka) ===")
-print(df_encoded)
-print("\n")
+# Tampilkan data angka di Streamlit (Opsional, untuk debug)
+with st.expander("Lihat Data yang sudah diubah ke Angka (Encoded)"):
+    st.write("Komputer hanya mengerti angka, jadi data diubah menjadi:")
+    st.dataframe(df_encoded, use_container_width=True)
 
 # 4. Memisahkan Data
 # Fitur: Data penentu (Warna, Ukuran, Bahan)

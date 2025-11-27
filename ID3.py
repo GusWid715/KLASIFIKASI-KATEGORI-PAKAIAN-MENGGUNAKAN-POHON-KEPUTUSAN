@@ -12,6 +12,10 @@ from sklearn.tree import export_text
 # Untuk visualisasi grafik pohon
 import matplotlib.pyplot as plt 
 
+# Konfigurasi Halaman Streamlit
+st.set_page_config(page_title="Kelompok x - Pemodelan dan Simulasi", layout="centered")
+st.title("Klasifikasi Kategori Pakaian Dengan Mengunakan ID3")
+st.write("---")
 
 # 2. Menyiapkan Data 
 data = {
@@ -22,10 +26,10 @@ data = {
 }
 
 # Membuat tabel (DataFrame) agar rapi
-df = pd.read_json(pd.DataFrame(data).to_json())
-print("=== Data Awal ===")
-print(df)
-print("\n")
+df = pd.DataFrame(data)
+
+st.subheader("1. Data Awal")
+st.dataframe(df, use_container_width=True)
 
 # 3. Preprocessing (Mengubah Kata menjadi Angka)
 # LabelEncoder terpisah untuk setiap kolom agar bisa dibalikkan nanti

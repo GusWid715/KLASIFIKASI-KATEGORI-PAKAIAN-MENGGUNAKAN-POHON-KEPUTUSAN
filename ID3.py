@@ -43,3 +43,8 @@ print("\n")
 features = df_encoded[['Warna', 'Ukuran', 'Bahan']]
 # Target: Hasil yang dicari (Kategori)
 target = df_encoded['Kategori']
+
+# 5. Membuat Model Pohon Keputusan (ID3)
+# criterion='entropy' digunakan agar mirip dengan rumus ID3 manual
+clf = tree.DecisionTreeClassifier(criterion='entropy')
+clf = clf.fit(features, target)

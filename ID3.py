@@ -64,20 +64,57 @@ clf = tree.DecisionTreeClassifier(criterion='entropy')
 clf = clf.fit(features, target)
 
 # 6. Menampilkan Hasil Pohon (Rules)
-from sklearn.tree import export_text
+st.subheader("2. Aturan Pohon Keputusan (Rules)")
 
 # Mengambil nama fitur agar aturan mudah dibaca
 r = export_text(clf, feature_names=['Warna', 'Ukuran', 'Bahan'])
 
-# --- TRIK AGAR OUTPUT BUKAN ANGKA ---
-# Kita ambil daftar nama kategori asli: ['Casual', 'Formal']
+# Output agar tidak berupa angka
+# Ambil daftar nama kategori asli: ['Casual', 'Formal']
 # Karena Casual urutan abjad pertama, dia jadi 0. Formal jadi 1.
 daftar_kategori = list(le_kategori.classes_) 
 
-# Kita ganti teks "class: 0" menjadi "class: Casual", dst.
+# Ganti teks "class: 0" menjadi "class: Casual", dst.
 for i, nama in enumerate(daftar_kategori):
     # Logika: ganti tulisan 'class: 0' dengan 'class: Casual'
     r = r.replace(f"class: {i}", f"class: {nama}")
 
-print("=== Hasil Pohon Keputusan (Rules) ===")
-print(r)
+# Tampilkan Rules di Web
+st.code(r)
+
+# --- VISUALISASI GRAFIK POHON ---
+st.subheader("3. Visualisasi Grafik Pohon")
+fig, ax = plt.subplots(figsize=(12, 6))
+tree.plot_tree(clf, 
+              feature_names=['Warna', 'Ukuran', 'Bahan'], 
+              class_names=le_kategori.classes_,
+              filled=True, 
+              rounded=True)
+st.pyplot(fig)
+
+# --- INTERAKSI PENGGUNA (PREDIKSI) ---
+st.subheader("4. Coba Prediksi Sendiri")
+st.info("Pilih atribut di bawah ini untuk melihat hasil prediksi sistem.")
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    input_warna = st.selectbox("Pilih Warna", df['Warna'].unique())
+with col2:
+    input_ukuran = st.selectbox("Pilih Ukuran", df['Ukuran'].unique())
+with col3:
+    input_bahan = st.selectbox("Pilih Bahan", df['Bahan'].unique())
+
+if st.button("🔍 Prediksi Kategori"):
+    # Ubah input user jadi angka
+    warna_kode = le_warna.transform([input_warna])[0]
+    ukuran_kode = le_ukuran.transform([input_ukuran])[0]
+    bahan_kode = le_bahan.transform([input_bahan])[0]
+    
+    # Lakukan prediksi
+    prediksi_angka = clf.predict([[warna_kode, ukuran_kode, bahan_kode]])[0]
+    
+    # Kembalikan angka ke kata (inverse transform)
+    prediksi_teks = le_kategori.inverse_transform([prediksi_angka])[0]
+    
+    st.success(f"Hasil Prediksi: **{prediksi_teks}**")

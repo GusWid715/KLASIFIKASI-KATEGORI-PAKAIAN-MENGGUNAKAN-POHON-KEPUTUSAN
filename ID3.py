@@ -48,3 +48,11 @@ target = df_encoded['Kategori']
 # criterion='entropy' digunakan agar mirip dengan rumus ID3 manual
 clf = tree.DecisionTreeClassifier(criterion='entropy')
 clf = clf.fit(features, target)
+
+# 6. Menampilkan Aturan Pohon (Rules)
+from sklearn.tree import export_text
+# Kita berikan nama fitur agar hasil bacanya mudah
+r = export_text(clf, feature_names=['Warna', 'Ukuran', 'Bahan'])
+
+print("=== Hasil Pohon Keputusan (Rules) ===")
+print(r)

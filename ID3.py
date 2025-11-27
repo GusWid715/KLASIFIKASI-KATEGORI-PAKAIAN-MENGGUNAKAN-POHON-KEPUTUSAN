@@ -13,8 +13,8 @@ from sklearn.tree import export_text
 import matplotlib.pyplot as plt 
 
 # Konfigurasi Halaman Streamlit
-st.set_page_config(page_title="Kelompok x - Pemodelan dan Simulasi", layout="centered")
-st.title("Klasifikasi Kategori Pakaian Dengan Mengunakan ID3")
+st.title("Klasifikasi Kategori Pakaian Dengan Menggunakan ID3")
+st.write("Kelompok x - Pemodelan dan Simulasi")
 st.write("---")
 
 # 2. Menyiapkan Data 
@@ -47,11 +47,6 @@ df_encoded['Ukuran'] = le_ukuran.fit_transform(df['Ukuran'])
 df_encoded['Bahan'] = le_bahan.fit_transform(df['Bahan'])
 df_encoded['Kategori'] = le_kategori.fit_transform(df['Kategori'])
 
-# Tampilkan data angka di Streamlit (Opsional, untuk debug)
-with st.expander("Lihat Data yang sudah diubah ke Angka (Encoded)"):
-    st.write("Komputer hanya mengerti angka, jadi data diubah menjadi:")
-    st.dataframe(df_encoded, use_container_width=True)
-
 # 4. Memisahkan Data
 # Fitur: Data penentu (Warna, Ukuran, Bahan)
 features = df_encoded[['Warna', 'Ukuran', 'Bahan']]
@@ -63,8 +58,7 @@ target = df_encoded['Kategori']
 clf = tree.DecisionTreeClassifier(criterion='entropy')
 clf = clf.fit(features, target)
 
-# 6. Menampilkan Hasil Pohon (Rules)
-st.subheader("2. Aturan Pohon Keputusan (Rules)")
+# 6. Menampilkan Hasil Pohon
 
 # Mengambil nama fitur agar aturan mudah dibaca
 r = export_text(clf, feature_names=['Warna', 'Ukuran', 'Bahan'])
@@ -79,11 +73,8 @@ for i, nama in enumerate(daftar_kategori):
     # Logika: ganti tulisan 'class: 0' dengan 'class: Casual'
     r = r.replace(f"class: {i}", f"class: {nama}")
 
-# Tampilkan Rules di Web
-st.code(r)
-
 # --- VISUALISASI GRAFIK POHON ---
-st.subheader("3. Visualisasi Grafik Pohon")
+st.subheader("2. Visualisasi Grafik Pohon")
 fig, ax = plt.subplots(figsize=(12, 6))
 tree.plot_tree(clf, 
               feature_names=['Warna', 'Ukuran', 'Bahan'], 
@@ -93,7 +84,7 @@ tree.plot_tree(clf,
 st.pyplot(fig)
 
 # --- INTERAKSI PENGGUNA (PREDIKSI) ---
-st.subheader("4. Coba Prediksi Sendiri")
+st.subheader("3. Coba Prediksi")
 st.info("Pilih atribut di bawah ini untuk melihat hasil prediksi sistem.")
 
 col1, col2, col3 = st.columns(3)

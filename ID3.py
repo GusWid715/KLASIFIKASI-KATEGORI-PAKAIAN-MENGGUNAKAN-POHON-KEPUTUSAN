@@ -37,3 +37,9 @@ df_encoded['Kategori'] = le.fit_transform(df['Kategori'])
 print("=== Data Setelah Diubah ke Angka ===")
 print(df_encoded)
 print("\n")
+
+# 4. Memisahkan Data
+# Fitur: Data penentu (Warna, Ukuran, Bahan)
+features = df_encoded[['Warna', 'Ukuran', 'Bahan']]
+# Target: Hasil yang dicari (Kategori)
+target = df_encoded['Kategori']

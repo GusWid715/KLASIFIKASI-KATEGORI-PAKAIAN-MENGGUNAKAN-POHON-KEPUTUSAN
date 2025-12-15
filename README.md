@@ -1,15 +1,84 @@
-TUGAS KELOMPOK
+🌳 Klasifikasi Kategori Pakaian (Pohon Keputusan ID3)
 
-POHON KEPUTUSAN:
+Tugas Kelompok 1 - Mata Kuliah Pemodelan dan Simulasi
+Program Studi Informatika - Universitas Udayana
 
-KLASIFIKASI KATEGORI PAKAIAN MENGGUNAKAN POHON KEPUTUSAN
+Aplikasi ini bertujuan untuk memprediksi kategori pakaian (Casual atau Formal) berdasarkan karakteristik fisik pakaian seperti Warna, Ukuran, dan Bahan. Sistem ini dibangun menggunakan algoritma Decision Tree (ID3) dengan kriteria Entropy.
 
-Kelompok x 
+📋 Fitur Utama
 
-A
+Visualisasi Data: Menampilkan dataset awal pakaian dalam bentuk tabel interaktif.
 
-B
+Aturan Keputusan (Rules): Menampilkan logika "If-Then" yang dihasilkan oleh algoritma ID3 dalam bahasa yang mudah dipahami.
 
-C
+Grafik Pohon: Visualisasi grafis struktur pohon keputusan untuk melihat alur logika klasifikasi.
 
-D
+Simulasi Prediksi: Pengguna dapat memilih atribut pakaian (Warna, Ukuran, Bahan) dan sistem akan menebak kategorinya secara real-time.
+
+🛠️ Teknologi yang Digunakan
+
+Proyek ini dikembangkan menggunakan bahasa pemrograman Python dengan pustaka berikut:
+
+Streamlit: Framework untuk membuat antarmuka web (UI) yang interaktif.
+
+Scikit-Learn: Implementasi algoritma Decision Tree Classifier (ID3).
+
+Pandas: Manipulasi dan penyajian data tabel.
+
+Matplotlib: Pembuatan grafik visualisasi pohon keputusan.
+
+🚀 Cara Menjalankan Aplikasi
+
+Ikuti langkah-langkah berikut untuk menjalankan aplikasi di komputer lokal Anda.
+
+1. Persiapan Environment
+
+Pastikan Anda memiliki Python terinstal. Disarankan menggunakan Virtual Environment agar bersih.
+
+# Buat environment baru (Windows)
+python -m venv myenv
+
+# Aktifkan environment
+myenv\Scripts\activate
+
+
+2. Instalasi Pustaka
+
+Instal semua dependensi yang diperlukan menggunakan pip.
+
+pip install -r requirements.txt
+
+
+Catatan: Jika file requirements.txt belum ada, instal manual dengan perintah:
+pip install streamlit pandas scikit-learn matplotlib
+
+3. Jalankan Program
+
+Gunakan perintah streamlit untuk memulai aplikasi.
+
+streamlit run app.py
+
+
+(Ganti app.py dengan nama file Python Anda jika berbeda, misal ID3.py)
+
+Setelah berhasil, browser akan otomatis terbuka di alamat: http://localhost:8501.
+
+📂 Struktur File
+
+app.py (atau ID3.py): Kode utama aplikasi (berisi logika ID3 dan UI Streamlit).
+
+requirements.txt: Daftar pustaka Python yang dibutuhkan.
+
+README.md: Dokumentasi proyek ini.
+
+👥 Kredit
+
+Kelompok [X] - Pemodelan dan Simulasi
+
+Anggota 1 (NIM)
+
+Anggota 2 (NIM)
+
+Anggota 3 (NIM)
+
+...
